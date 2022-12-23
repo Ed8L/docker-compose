@@ -9,13 +9,6 @@ WORKDIR /var/www
 
 RUN apt-get update && apt-get install -y curl git zip unzip
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && ln -s $(composer config --global home) /root/composer
-
-ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
-
-RUN composer install
-
 RUN cp .env.example .env
 
 RUN php artisan key:generate
